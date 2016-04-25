@@ -46,14 +46,14 @@ void ofApp::draw(){
    // plane.rotate(mvp.knob1 * 360, 1.0, 0.0, 0.0);
    // plane.rotate(mvp.knob2 * 360, 0, 1.0, 0.0);
    // plane.rotate(mvp.knob3 * 360, 0, 0, 1.0);
-    plane.set( mvp.knob1 * 200 + 1, mvp.knob2 * 200 + 1);
+    plane.set( mvp.knob2 * 200 + 1, mvp.knob3 * 200 + 1);
     
     ofFill();
     density = 0;
 	for (unsigned int i = 0; i < mvp.left.size(); i++){
-        plane.setPosition(i * 5, 360 - mvp.left[i] * 400.0f, 0);
+        plane.setPosition(i * 4, 360 - (mvp.left[i] * 400.0f * (mvp.knob1 * 5 + 1)), 0);
         density++;
-        if (density > (mvp.knob3 * mvp.left.size() + 3)){
+        if (density > (mvp.knob4 * mvp.left.size() + 3)){
             plane.draw();
             density = 0;
         }
