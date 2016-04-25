@@ -21,10 +21,8 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-	fbo.begin();
-    if (mvp.newSound){
+//	fbo.begin();
 	    ofBackground(220,255,200);	
-        mvp.newSound = false;
 	ofSetColor(225);
 	if (mvp.key1){
 		mvp.key1 = 0;
@@ -39,23 +37,23 @@ void ofApp::draw(){
 
     ofSetLineWidth(2);	
     ofSetColor(mvp.knob6*255,mvp.knob7*255,mvp.knob8*255);    
-/*                
-        ofBeginShape();
-        for (unsigned int i = 0; i < mvp.left.size(); i++){
-            ofVertex(i*5, 360 - mvp.left[i]*500.0f* (mvp.knob1*5 +1));
-        }
-        ofEndShape(false);
-  */
 
      ofBeginShape();
+        float x0,y0;
         for (unsigned int i = 0; i < mvp.left.size() ; i++){
-            float R = 200;
+            float R = 1000 * mvp.knob2;
 
-            R = R + mvp.left[i] * (mvp.knob1*R +1) * 10;
+            //R = R + mvp.left[i] * mvp.knob1 * 500;  // for regular effect
+            R = R + mvp.left[i] * mvp.knob1 * R * 100; // for cool effect
             float x = R*cos(((float)i /  mvp.left.size()) * TWO_PI) + ofGetWidth() / 2;
             float y = R*sin(((float)i /  mvp.left.size()) * TWO_PI) + ofGetHeight() / 2;
             ofVertex(x, y);
+            if (i==0){   // store first
+                x0 = x;
+                y0 = y;
+            }
         }
+        ofVertex(x0,y0);  // connect last to first
      ofEndShape(false);
 	
     ofSetColor(190);    
@@ -63,10 +61,9 @@ void ofApp::draw(){
 	
 
     mvp.draw();
-    }
 	
-	fbo.end();
-	fbo.draw(0,0);
+//	fbo.end();
+//	fbo.draw(0,0);
 
 }
 
