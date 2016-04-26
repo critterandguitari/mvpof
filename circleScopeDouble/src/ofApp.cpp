@@ -11,6 +11,7 @@ void ofApp::setup(){
 	ofBackground(0);
     fill = 0;
     fbo.allocate(ofGetWidth(), ofGetHeight() );
+    bgCount = 0;
 }
 
 //--------------------------------------------------------------
@@ -22,8 +23,22 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
 //	fbo.begin();
-	    ofBackground(220,255,200);	
-	ofSetColor(225);
+	
+    float maxLevel = 0;
+    for (unsigned int i = 0; i < mvp.left.size() ; i++){
+        if (mvp.left[i] > maxLevel) maxLevel = mvp.left[i];
+    }
+    cout << maxLevel << "\n";
+
+    //ofBackground(220,255,200);	
+    if (maxLevel > mvp.knob5){
+        bgCount = 0;
+        ofBackground(ofRandom(0,255), ofRandom(0,255), ofRandom(0,255));	
+	}
+    
+    bgCount++;
+    
+    ofSetColor(225);
 	if (mvp.key1){
 		mvp.key1 = 0;
         fill++;
@@ -59,10 +74,10 @@ void ofApp::draw(){
      ofSetColor(255-mvp.knob6*255,255-mvp.knob7*255,255-mvp.knob8*255);    
 
      ofBeginShape();
-        R = 1000 * mvp.knob3;
+        R = 800 * mvp.knob3;
         for (unsigned int i = 0; i < mvp.left.size() ; i++){
 
-            R = R + mvp.left[i] * mvp.knob1 * 200;
+            R = R + mvp.left[i] * mvp.knob1 * 800;
             float x = R*cos(((float)i /  mvp.left.size()) * TWO_PI) + ofGetWidth() / 2;
             float y = R*sin(((float)i /  mvp.left.size()) * TWO_PI) + ofGetHeight() / 2;
             ofVertex(x, y);

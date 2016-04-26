@@ -43,9 +43,6 @@ void ofApp::draw(){
     
     texture.getTexture().bind();
     // Plane //
-   // plane.rotate(mvp.knob1 * 360, 1.0, 0.0, 0.0);
-   // plane.rotate(mvp.knob2 * 360, 0, 1.0, 0.0);
-   // plane.rotate(mvp.knob3 * 360, 0, 0, 1.0);
     plane.set( mvp.knob2 * 200 + 1, mvp.knob3 * 200 + 1);
     
     ofFill();

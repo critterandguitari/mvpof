@@ -23,7 +23,9 @@ class ofApp : public ofBaseApp {
 		void gotMessage(ofMessage msg);
 
         MVP mvp;
-        
+
+        unsigned int bgCount;
+
         unsigned int fill;
 		ofFbo fbo;
 				
